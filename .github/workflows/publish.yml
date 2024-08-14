@@ -1,4 +1,4 @@
-name: http-ease
+name: http-ease-ci/cd
 
 on:
   push:

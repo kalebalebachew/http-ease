@@ -1,10 +1,8 @@
-name: http-ease
+name: http-ease-ci/cd
 
 on:
-  release:
-    types: [created]
   push:
-    branches: ["main"]
+    branches: ["testing"]
 
 jobs:
   build:

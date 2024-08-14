@@ -17,5 +17,10 @@ import HttpEase from 'http-ease'
 const ease = new HttpEase()
 ```
 
+``` javascript 
+ease.get("https://jsonplaceholder.typicode.com/posts")
+
+```
+
 
 

@@ -1,36 +1,43 @@
 name: http-ease
 
 on:
-  release:
-    types: [created]
+  push:
+    branches: ["main"]
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-
       - run: npm ci
-
       - run: npm test
 
-  publish-npm:
+  bump-version:
     needs: build
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm version patch --no-git-tag-version
+      - run: git commit -am "chore: bump version"
+      - run: git tag $(node -p "require('./package.json').version")
+      - run: git push origin --tags
 
+  publish-npm:
+    needs: bump-version
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: 20
           registry-url: https://registry.npmjs.org/
-
       - run: npm ci
-
       - run: npm publish
         env:
-          NODE_AUTH_TOKEN: ${{secrets.npm_token}}
+          NODE_AUTH_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}

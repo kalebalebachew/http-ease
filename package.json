@@ -1,5 +1,5 @@
 {
-  "type" :"module",
+  "type": "module",
   "name": "http-ease",
   "version": "1.1.0",
   "description": "A simple, lightweight HTTP request library for Node.js and browsers",
@@ -8,12 +8,25 @@
     "test": "mocha",
     "build": "echo 'Build step placeholder'"
   },
-  "keywords": ["http", "request", "fetch", "axios", "http-ease", "nodejs", "browser"],
+  "keywords": [
+    "http",
+    "request",
+    "fetch",
+    "axios",
+    "http-ease",
+    "nodejs",
+    "browser"
+  ],
   "author": "Kaleb Alebachew Haile",
   "license": "MIT",
-  "dependencies": {},
   "devDependencies": {
+    "@semantic-release/changelog": "^6.0.3",
+    "@semantic-release/commit-analyzer": "^13.0.0",
+    "@semantic-release/git": "^10.0.1",
+    "@semantic-release/npm": "^12.0.1",
+    "@semantic-release/release-notes-generator": "^14.0.1",
+    "chai": "^4.3.4",
     "mocha": "^9.0.0",
-    "chai": "^4.3.4"
+    "semantic-release": "^24.0.0"
   }
 }

@@ -93,6 +93,9 @@ class HttpEase {
   put(url, data, headers = {}) {
     return this.request("PUT", url, data, headers);
   }
+  patch(url, data, headers = {}) {
+    return this.request("PUT", url, data, headers);
+  }
 
   delete(url, headers = {}) {
     return this.request("DELETE", url, null, headers);

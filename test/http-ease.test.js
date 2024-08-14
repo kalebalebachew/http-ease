@@ -30,6 +30,17 @@ describe("HttpEase TESTS", () => {
     console.log("PUT Response:", data);
     expect(data).to.have.property("id").that.equals(1);
   });
+  it("should PATCH data to the API", async () => {
+    const updatedPost = {
+      id: 1,
+      title: "patch-updated-kaleb",
+      body: "patch-updated-kaleb-alebachew",
+      userId: 1,
+    };
+    const data = await ease.patch("/posts/1", updatedPost);
+    console.log("PATCH Response:", data);
+    expect(data).to.have.property("id").that.equals(1);
+  });
 
   it("should DELETE data from the API", async () => {
     const response = await ease.delete("/posts/1");

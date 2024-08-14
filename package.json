@@ -1,0 +1,19 @@
+{
+  "type" :"module",
+  "name": "http-ease",
+  "version": "1.0.0",
+  "description": "A simple, lightweight HTTP request library for Node.js and browsers",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "mocha",
+    "build": "echo 'Build step placeholder'"
+  },
+  "keywords": ["http", "request", "fetch", "axios", "http-ease", "nodejs", "browser"],
+  "author": "Kaleb Alebachew Haile",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "mocha": "^9.0.0",
+    "chai": "^4.3.4"
+  }
+}

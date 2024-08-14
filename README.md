@@ -1,5 +1,6 @@
 # http-ease 
-###  this is a basic(dummy) and minimalist javacsript http library that supports basic http methods(for learning purposes)
+###  this is a basic(dummy) javacsript http library.  
+### It supports basic HTTP methods and provides a way to interact with APIs and servers
 
 ## Features
 - Supports basic HTTP methods - GET, POST, PUT, PATCH, and DELETE

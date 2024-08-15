@@ -50,4 +50,4 @@ jobs:
       - name: Publish to npm
         run: npm publish --access public --tag ${{ env.tag }}
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}

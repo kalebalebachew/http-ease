@@ -9,7 +9,7 @@ on:
 
 jobs:
   test:
-    name: test & typecheck
+    name: test
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo

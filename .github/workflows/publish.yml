@@ -1,22 +1,48 @@
-name: Release Workflow
+name: CI/CD and Release
 
 on:
+  pull_request:
+    branches: main
   push:
-    branches:
-      - main
+    branches: main
+  merge_group: {}
 
 jobs:
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build
+        run: npm run build
+
+      - name: Test
+        run: npm test
+
   bump-version:
     runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: 20
       - run: npm version patch --no-git-tag-version
-      - run: git commit -am "chore: bump version"
+      - run: "git commit -m \"chore: bump version\""
       - run: git tag v$(node -p "require('./package.json').version")
       - run: git push origin --follow-tags
+
 
   release:
     needs: bump-version

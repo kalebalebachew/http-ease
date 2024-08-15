@@ -44,8 +44,8 @@ jobs:
 
       - name: Set up Git user
         run: |
-          git config --local user.name "Your Name"
-          git config --local user.email "your.email@example.com"
+          git config --local user.name "kalebalebachew"
+          git config --local user.email "kalebalebachew4@gmail.com"
 
       - name: Bump version
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'

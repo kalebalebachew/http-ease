@@ -31,17 +31,30 @@ jobs:
         run: npm test
 
   bump-version:
+    name: Bump Version
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
           node-version: 20
-      - run: npm version patch --no-git-tag-version
-      - run: "git commit -m \"chore: bump version\""
-      - run: git tag v$(node -p "require('./package.json').version")
-      - run: git push origin --follow-tags
+
+      - name: Set up Git user
+        run: |
+          git config --local user.name "kalebalebachew"
+          git config --local user.email "kalebalebachew4@gmail.com"
+
+      - name: Bump version
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        run: |
+          npm version patch --no-git-tag-version
+          git commit -m "chore: bump version"
+          git tag v$(node -p "require('./package.json').version")
+          git push origin --follow-tags
+
 
 
   release:

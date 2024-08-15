@@ -6,7 +6,7 @@
   "main": "src/index.js",
   "scripts": {
     "test": "mocha",
-    "build": "your-build-command-here"
+    "build": "npm build"
   },
   "repository": {
     "type": "git",

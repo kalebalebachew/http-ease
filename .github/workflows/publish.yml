@@ -1,29 +1,53 @@
-name: semantic-version
+name: Release
 
 on:
   push:
-    branches:
-      - main
+    tags:
+      - 'v*'
 
-jobs:
+jobs: 
   release:
+    permissions: 
+      contents: write
+      id-token: write
     runs-on: ubuntu-latest
-    steps:
+    steps: 
       - name: Checkout code
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
+        uses: actions/checkout@v4
+        with: 
+          fetch-depth: 0  
 
-      - name: Set up Node.js
+      - name: Install Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
+          cache: 'npm'
 
       - name: Install dependencies
         run: npm install
+    
+      - name: Check version
+        id: check_version
+        run: |
+          tag=$(echo ${GITHUB_REF#refs/tags/})
+          if [[ $tag == *"beta"* ]]; then
+            echo "tag=beta" >> $GITHUB_ENV
+          elif [[ $tag == *"alpha"* ]]; then
+            echo "tag=alpha" >> $GITHUB_ENV
+          else
+            echo "tag=latest" >> $GITHUB_ENV
+          fi
 
-      - name: Run Semantic Release
+      - name: Build
+        run: npm run build
+
+      - name: Generate Changelog
+        run: npx changelogithub
+        if: env.tag == 'latest'
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}
-        run: npx semantic-release
+          
+      - name: Publish to npm
+        run: npm publish --access public --tag ${{ env.tag }}
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

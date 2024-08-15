@@ -6,7 +6,7 @@
   "main": "src/index.js",
   "scripts": {
     "test": "mocha",
-    "build": "build"
+    "build": "echo 'Build step placeholder'"
   },
   "repository": {
   "type": "git",
